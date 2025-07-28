@@ -1,0 +1,148 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shadcn UI CSS variables (for default theme) */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
+}
+
+/* Shadcn UI Dark theme CSS variables */
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 210 40% 98%;
+}
+
+/* Base styles for the application, matching responsive UI goal */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  @apply bg-dark-1 text-light-1 font-sans;
+}
+
+/* Helper classes as mentioned in transcript (examples) */
+
+/* General Layout Helpers */
+.flex-center {
+  @apply flex justify-center items-center;
+}
+.flex-between {
+  @apply flex justify-between items-center;
+}
+.flex-col {
+  @apply flex flex-col;
+}
+.w-full {
+  @apply w-full;
+}
+.h-full {
+  @apply h-full;
+}
+.h-screen {
+  height: 100vh;
+}
+.max-w-5xl {
+    @apply max-w-[1024px]; /* Based on create post container width */
+}
+
+/* Auth Layout specific */
+.auth-side-image {
+    display: none; /* Hidden by default */
+}
+
+@media (min-width: 768px) { /* Show on medium screens and up */
+    .auth-side-image {
+        display: block;
+        width: 50%;
+        height: 100vh;
+        object-fit: cover;
+        margin-left: 20px;
+    }
+}
+
+/* Common Container for Pages (Home, Explore, etc.) */
+.common-container {
+    @apply flex flex-1 flex-col items-center justify-start py-10 px-5 md:py-14 lg:p-14 overflow-y-scroll custom-scroll-style;
+}
+
+/* Custom Scrollbar */
+.custom-scroll-style::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+.custom-scroll-style::-webkit-scrollbar-track {
+  background: #1f1f22; /* Color of the scrollbar track */
+  border-radius: 10px;
+}
+.custom-scroll-style::-webkit-scrollbar-thumb {
+  background: #5c5c7b; /* Color of the scrollbar thumb */
+  border-radius: 10px;
+}
+.custom-scroll-style::-webkit-scrollbar-thumb:hover {
+  background: #7878a3; /* Color of the scrollbar thumb on hover */
+}
+
+
+/* Text Styles */
+.h3-bold { @apply font-bold text-xl md:text-2xl; }
+.h2-bold { @apply font-bold text-2xl md:text-3xl; }
+.base-medium { @apply text-base font-medium; }
+.small-medium { @apply text-sm font-medium; }
+.subtle-semibold { @apply text-xs font-semibold; }
+
+/* Shadcn-UI related helpers (will be integrated with Shadcn components) */
+.shad-button-primary {
+  @apply bg-primary-500 text-white hover:bg-primary-500/90;
+}
+.shad-button-dark4 {
+  @apply bg-dark-4 text-light-1 hover:bg-dark-4/90;
+}
+.shad-input {
+  @apply bg-dark-4 border-none text-light-1;
+}
+.shad-textarea {
+  @apply bg-dark-4 border-none text-light-1 resize-none;
+}
+.shad-form-label {
+    @apply text-light-3 text-sm-medium;
+}
+.shad-form-message {
+    @apply text-red text-xs;
+}
