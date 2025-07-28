@@ -39,7 +39,7 @@
   --primary-foreground: 222.2 47.4% 11.2%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
+  --muted: 210 40% 96.1%;
   --muted-foreground: 215 20.2% 65.1%;
   --accent: 217.2 32.6% 17.5%;
   --accent-foreground: 210 40% 98%;
@@ -59,29 +59,35 @@ html, body, #root {
 }
 
 /* Helper classes as mentioned in transcript (examples) */
-/* CORRECTED: Wrap custom classes in @layer components */
 @layer components {
-    /* General Layout Helpers */
+    /* General Layout Helpers - Convert @apply to direct CSS or remove if always in JSX */
+    /* If these are always used as direct Tailwind classes in JSX, remove them from here */
+    /* For example, if you always use "flex justify-center items-center" in JSX, you don't need .flex-center here */
     .flex-center {
-      @apply flex justify-center items-center;
+      display: flex; /* Direct CSS */
+      justify-content: center; /* Direct CSS */
+      align-items: center; /* Direct CSS */
     }
     .flex-between {
-      @apply flex justify-between items-center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .flex-col {
-      @apply flex flex-col;
+      display: flex;
+      flex-direction: column;
     }
     .w-full {
-      @apply w-full;
+      width: 100%;
     }
     .h-full {
-      @apply h-full;
+      height: 100%;
     }
     .h-screen {
       height: 100vh;
     }
     .max-w-5xl {
-        @apply max-w-[1024px]; /* Based on create post container width */
+        max-width: 1024px;
     }
 
     /* Auth Layout specific */
@@ -89,7 +95,7 @@ html, body, #root {
         display: none; /* Hidden by default */
     }
 
-    @media (min-width: 768px) { /* Show on medium screens and up */
+    @media (min-width: 768px) {
         .auth-side-image {
             display: block;
             width: 50%;
@@ -101,23 +107,24 @@ html, body, #root {
 
     /* Common Container for Pages (Home, Explore, etc.) */
     .common-container {
+        /* Keep @apply for multiple Tailwind classes that define a complex component */
         @apply flex flex-1 flex-col items-center justify-start py-10 px-5 md:py-14 lg:p-14 overflow-y-scroll custom-scroll-style;
     }
 
     /* Custom Scrollbar */
     .custom-scroll-style::-webkit-scrollbar {
-      width: 8px; /* Width of the scrollbar */
+      width: 8px;
     }
     .custom-scroll-style::-webkit-scrollbar-track {
-      background: #1f1f22; /* Color of the scrollbar track */
+      background: #1f1f22;
       border-radius: 10px;
     }
     .custom-scroll-style::-webkit-scrollbar-thumb {
-      background: #5c5c7b; /* Color of the scrollbar thumb */
+      background: #5c5c7b;
       border-radius: 10px;
     }
     .custom-scroll-style::-webkit-scrollbar-thumb:hover {
-      background: #7878a3; /* Color of the scrollbar thumb on hover */
+      background: #7878a3;
     }
 
 
