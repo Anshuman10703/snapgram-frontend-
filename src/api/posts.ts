@@ -1,7 +1,5 @@
-// 13. src/api/posts.ts (API functions for Posts)
-// -----------------------------------------------------------------------------
-// Contains functions to interact with your Post-related Lambda endpoints.
-import axios from 'axios'; // Add this import
+// ~/snapgram-amplify-original/frontend/src/api/posts.ts
+import axios from 'axios';
 import { API_GATEWAY_URL, S3_BUCKET_NAME, S3_BUCKET_URL_PREFIX } from '../aws-config.ts';
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
@@ -29,11 +27,11 @@ export interface UserProfile {
   bio?: string;
 }
 
-// New function to get a pre-signed URL from your Lambda
 export const getPresignedUrl = async (fileName: string, contentType: string): Promise<{ presignedUrl: string; imageID: string; imageUrl: string } | null> => {
   try {
     const response = await axios.get(`${API_GATEWAY_URL}/presigned-url?fileName=${fileName}&contentType=${contentType}`);
-    const data = response.data; // Axios puts response data in .data
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { presignedUrl: string; imageID: string; imageUrl: string };
     return data;
   } catch (error: any) {
     console.error('Error getting pre-signed URL:', error.response?.data || error.message);
@@ -42,17 +40,15 @@ export const getPresignedUrl = async (fileName: string, contentType: string): Pr
   }
 };
 
-// New function to perform the direct S3 upload using the presigned URL
 export const uploadFileToS3Direct = async (presignedUrl: string, file: File): Promise<boolean> => {
   try {
     const response = await axios.put(presignedUrl, file, {
       headers: {
-        'Content-Type': file.type, // Important: Content-Type must match what was signed
+        'Content-Type': file.type,
       },
-      // Axios handles arraybuffer/blob directly for PUT
     });
 
-    if (response.status >= 200 && response.status < 300) { // Check for 2xx status codes
+    if (response.status >= 200 && response.status < 300) {
       console.log('File uploaded directly to S3 using presigned URL.');
       return true;
     } else {
@@ -65,16 +61,13 @@ export const uploadFileToS3Direct = async (presignedUrl: string, file: File): Pr
   }
 };
 
-// Original deleteFileFromS3 function (adjusted to remove credentials param as it's not needed for direct S3 delete via Lambda proxy)
 export const deleteFileFromS3 = async (imageID: string): Promise<boolean> => {
   if (!imageID) {
     console.error("Deletion failed: Image ID missing.");
     return false;
   }
-  // In this simplified setup, the deletePost Lambda handles S3 deletion.
-  // This frontend function is a placeholder if you needed a separate API for image deletion.
   console.warn("deleteFileFromS3 is not implemented for direct frontend use in this simplified version. deletePost Lambda handles S3 deletion.");
-  return true; // Assume success for now, as the backend handles it.
+  return true;
 };
 
 
@@ -83,7 +76,8 @@ export const createPost = async (postData: { caption: string; tags: string; loca
     const response = await axios.post(`${API_GATEWAY_URL}/posts`, postData, {
       headers: { 'Content-Type': 'application/json' },
     });
-    const data = response.data;
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { post: Post };
     return data.post;
   } catch (error: any) {
     console.error('Error creating post:', error.response?.data || error.message);
@@ -96,7 +90,8 @@ export const getPosts = async (lastId?: string): Promise<{ posts: Post[]; lastId
   try {
     const url = lastId ? `${API_GATEWAY_URL}/posts?lastId=${lastId}` : `${API_GATEWAY_URL}/posts`;
     const response = await axios.get(url);
-    const data = response.data;
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { posts: Post[]; lastId: string | null };
     return data;
   } catch (error: any) {
     console.error('Error fetching posts:', error.response?.data || error.message);
@@ -108,8 +103,9 @@ export const getPosts = async (lastId?: string): Promise<{ posts: Post[]; lastId
 export const getPostById = async (postId: string): Promise<Post | null> => {
   try {
     const response = await axios.get(`${API_GATEWAY_URL}/posts/${postId}`);
-    const data = response.data;
-    if (response.status === 404) { // Check for 404 explicitly
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { post: Post };
+    if (response.status === 404) {
       return null;
     }
     return data.post;
@@ -125,7 +121,8 @@ export const updatePost = async (postId: string, postData: Partial<Post>): Promi
     const response = await axios.put(`${API_GATEWAY_URL}/posts/${postId}`, postData, {
       headers: { 'Content-Type': 'application/json' },
     });
-    const data = response.data;
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { post: Post };
     return data.post;
   } catch (error: any) {
     console.error('Error updating post:', error.response?.data || error.message);
@@ -137,7 +134,8 @@ export const updatePost = async (postId: string, postData: Partial<Post>): Promi
 export const deletePost = async (postId: string): Promise<boolean> => {
   try {
     const response = await axios.delete(`${API_GATEWAY_URL}/posts/${postId}`);
-    const data = response.data;
+    // CORRECTED: Explicit type assertion for response.data
+    const data = response.data as { message: string };
     alert(data.message);
     return true;
   } catch (error: any) {
