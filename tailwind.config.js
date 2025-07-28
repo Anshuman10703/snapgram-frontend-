@@ -1,6 +1,8 @@
 // ~/snapgram-amplify-original/frontend/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+// CORRECTED: Use import for defaultTheme and tailwindcss-animate
+import defaultTheme from 'tailwindcss/defaultTheme';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 export default {
   content: [
@@ -61,5 +63,6 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  // CORRECTED: Use the imported tailwindcssAnimate
+  plugins: [tailwindcssAnimate],
 };
