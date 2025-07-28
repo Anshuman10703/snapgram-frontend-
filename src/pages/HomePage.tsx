@@ -36,7 +36,6 @@ const HomePage: React.FC = () => {
   <header className="flex justify-between items-center w-full py-4 mb-6 border-b border-dark-4">
     <Link to="/" className="flex items-center gap-2">
       <img src="/assets/images/logo.svg" alt="Snapgram Logo" className="h-10" />
-      <span className="h2-bold text-light-1">Snapgram</span>
     </Link>
 
     <nav className="flex items-center gap-4">

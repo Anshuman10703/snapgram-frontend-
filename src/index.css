@@ -1,9 +1,9 @@
-/* Tailwind base layers */
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Shadcn UI Light Theme */
+/* Shadcn UI CSS variables (for default theme) */
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -27,7 +27,7 @@
   --radius: 0.5rem;
 }
 
-/* Dark Theme Variables */
+/* Shadcn UI Dark theme CSS variables */
 .dark {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
@@ -50,93 +50,108 @@
   --ring: 210 40% 98%;
 }
 
-/* Base layout styling */
+/* Base styles for the application, matching responsive UI goal */
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
-
-  @apply bg-slate-900 text-light-1 font-sans antialiased;
+  @apply bg-slate-900 text-light-1 font-sans;
 }
 
-/* Components Layer: Utility + Custom Classes */
+/* Helper classes as mentioned in transcript (examples) */
 @layer components {
-  /* Layout Utilities */
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-  .flex-between {
-    @apply flex items-center justify-between;
-  }
-  .flex-col {
-    @apply flex flex-col;
-  }
-
-  .w-full { width: 100%; }
-  .h-full { height: 100%; }
-  .h-screen { height: 100vh; }
-  .max-w-5xl { max-width: 1024px; }
-
-  /* Auth Layout */
-  .auth-side-image {
-    display: none;
-  }
-  @media (min-width: 768px) {
-    .auth-side-image {
-      display: block;
-      width: 50%;
-      height: 100vh;
-      object-fit: cover;
-      margin-left: 20px;
+    /* General Layout Helpers - Convert @apply to direct CSS or remove if always in JSX */
+    /* If these are always used as direct Tailwind classes in JSX, remove them from here */
+    /* For example, if you always use "flex justify-center items-center" in JSX, you don't need .flex-center here */
+    .flex-center {
+      display: flex; /* Direct CSS */
+      justify-content: center; /* Direct CSS */
+      align-items: center; /* Direct CSS */
     }
-  }
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .w-full {
+      width: 100%;
+    }
+    .h-full {
+      height: 100%;
+    }
+    .h-screen {
+      height: 100vh;
+    }
+    .max-w-5xl {
+        max-width: 1024px;
+    }
 
-  /* Shared container styling */
-  .common-container {
-    @apply flex flex-1 flex-col items-center justify-start py-10 px-5 md:py-14 lg:p-14 overflow-y-scroll custom-scroll-style;
-  }
+    /* Auth Layout specific */
+    .auth-side-image {
+        display: none; /* Hidden by default */
+    }
 
-  /* Scrollbar Styling */
-  .custom-scroll-style::-webkit-scrollbar {
-    width: 8px;
-  }
-  .custom-scroll-style::-webkit-scrollbar-track {
-    background: #1f1f22;
-    border-radius: 10px;
-  }
-  .custom-scroll-style::-webkit-scrollbar-thumb {
-    background: #5c5c7b;
-    border-radius: 10px;
-  }
-  .custom-scroll-style::-webkit-scrollbar-thumb:hover {
-    background: #7878a3;
-  }
+    @media (min-width: 768px) {
+        .auth-side-image {
+            display: block;
+            width: 50%;
+            height: 100vh;
+            object-fit: cover;
+            margin-left: 20px;
+        }
+    }
 
-  /* Typography */
-  .h3-bold { @apply text-xl md:text-2xl font-bold; }
-  .h2-bold { @apply text-2xl md:text-3xl font-bold; }
-  .base-medium { @apply text-base font-medium; }
-  .small-medium { @apply text-sm font-medium; }
-  .subtle-semibold { @apply text-xs font-semibold; }
+    /* Common Container for Pages (Home, Explore, etc.) */
+    .common-container {
+        /* Keep @apply for multiple Tailwind classes that define a complex component */
+        @apply flex flex-1 flex-col items-center justify-start py-10 px-5 md:py-14 lg:p-14 overflow-y-scroll custom-scroll-style;
+    }
 
-  /* Shadcn UI Form Styles */
-  .shad-button-primary {
-    @apply bg-primary-500 text-white hover:bg-primary-600 transition duration-150 ease-in-out;
-  }
-  .shad-button-dark4 {
-    @apply bg-dark-4 text-light-1 hover:bg-dark-4/80 transition duration-150 ease-in-out;
-  }
-  .shad-input {
-    @apply bg-dark-4 border-none text-light-1 placeholder-light-4 focus:ring-2 focus:ring-primary-500;
-  }
-  .shad-textarea {
-    @apply bg-dark-4 border-none text-light-1 placeholder-light-4 resize-none focus:ring-2 focus:ring-primary-500;
-  }
-  .shad-form-label {
-    @apply text-light-3 text-sm font-medium;
-  }
-  .shad-form-message {
-    @apply text-red-500 text-xs mt-1;
-  }
-}
+    /* Custom Scrollbar */
+    .custom-scroll-style::-webkit-scrollbar {
+      width: 8px;
+    }
+    .custom-scroll-style::-webkit-scrollbar-track {
+      background: #1f1f22;
+      border-radius: 10px;
+    }
+    .custom-scroll-style::-webkit-scrollbar-thumb {
+      background: #5c5c7b;
+      border-radius: 10px;
+    }
+    .custom-scroll-style::-webkit-scrollbar-thumb:hover {
+      background: #7878a3;
+    }
+
+
+    /* Text Styles */
+    .h3-bold { @apply font-bold text-xl md:text-2xl; }
+    .h2-bold { @apply font-bold text-2xl md:text-3xl; }
+    .base-medium { @apply text-base font-medium; }
+    .small-medium { @apply text-sm font-medium; }
+    .subtle-semibold { @apply text-xs font-semibold; }
+
+    /* Shadcn-UI related helpers (will be integrated with Shadcn components) */
+    .shad-button-primary {
+      @apply bg-primary-500 text-white hover:bg-primary-500/90;
+    }
+    .shad-button-dark4 {
+      @apply bg-dark-4 text-light-1 hover:bg-dark-4/90;
+    }
+    .shad-input {
+      @apply bg-dark-4 border-none text-light-1;
+    }
+    .shad-textarea {
+      @apply bg-dark-4 border-none text-light-1 resize-none;
+    }
+    .shad-form-label {
+        @apply text-light-3 text-sm-medium;
+    }
+    .shad-form-message {
+        @apply text-red text-xs;
+    }
+} /* End @layer components */
