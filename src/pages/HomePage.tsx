@@ -31,41 +31,66 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="common-container flex-col items-center justify-start max-w-5xl"> {/* Tailwind classes */}
-      {/* Header with Logo and Navigation */}
-      <header className="flex justify-between items-center w-full p-4 mb-6 border-b border-dark-4"> {/* Tailwind classes */}
-        <Link to="/" className="flex items-center gap-2"> {/* Tailwind classes */}
-          <img src="/public/assets/images/logo.svg" alt="Snapgram Logo" className="h-10" /> {/* Tailwind classes */}
-          <span className="h2-bold text-light-1">Snapgram</span> {/* Tailwind classes */}
-        </Link>
-        <nav className="flex items-center gap-4"> {/* Tailwind classes */}
-          <StyledButton onClick={() => navigate('/create-post')} className="shad-button-primary">Create Post</StyledButton> {/* Tailwind classes */}
-          {user && (
-            <StyledButton onClick={signOut} className="shad-button-dark4">Sign Out</StyledButton> 
-          )}
-        </nav>
-      </header>
+<div className="common-container flex-col items-center justify-start max-w-5xl mx-auto px-4 sm:px-6">
+  {/* Header with Logo and Navigation */}
+  <header className="flex justify-between items-center w-full py-4 mb-6 border-b border-dark-4">
+    <Link to="/" className="flex items-center gap-2">
+      <img src="/assets/images/logo.svg" alt="Snapgram Logo" className="h-10" />
+      <span className="h2-bold text-light-1">Snapgram</span>
+    </Link>
 
-      <h2 className="h2-bold text-center mb-6">Snapgram Feed</h2> {/* Tailwind classes */}
-      
+    <nav className="flex items-center gap-4">
+      <StyledButton 
+        onClick={() => navigate('/create-post')} 
+        className="shad-button-primary hover:bg-primary-600 transition duration-200"
+      >
+        Create Post
+      </StyledButton>
+
       {user && (
-        <div className="text-center mb-6"> {/* Tailwind classes */}
-          <p className="text-green-400">
-            Welcome, {user.name} ({user.username})! Your ID: {user.id}
-          </p>
-        </div>
+        <StyledButton 
+          onClick={signOut} 
+          className="shad-button-dark4 hover:bg-dark-3 transition duration-200"
+        >
+          Sign Out
+        </StyledButton>
       )}
-      
-      {loading && <Message>Loading posts...</Message>}
-      {error && <Message className="text-red">Error: {error}</Message>}
-      {!loading && !error && posts.length === 0 && <Message>No posts yet. Be the first to create one!</Message>}
-      
-      <div className="post-grid"> {/* Tailwind classes */}
-        {posts.map(post => (
-          <PostCard key={post.id} post={post} currentUser={user} />
-        ))}
-      </div>
+    </nav>
+  </header>
+
+  {/* Feed Header */}
+  <h2 className="h2-bold text-center mb-6">Snapgram Feed</h2>
+
+  {/* Welcome Message */}
+  {user && (
+    <div className="text-center mb-6">
+      <p className="text-green-400 text-base sm:text-lg">
+        Welcome, {user?.name || 'User'} ({user?.username || 'anon'})
+      </p>
     </div>
+  )}
+
+  {/* Status Messages */}
+  {loading && (
+    <Message className="text-light-2 text-center mb-4">Loading posts...</Message>
+  )}
+  {error && (
+    <Message className="text-red-500 text-center mb-4">Error: {error}</Message>
+  )}
+  {!loading && !error && posts.length === 0 && (
+    <Message className="text-light-3 text-center mb-4">
+      No posts yet. Be the first to create one!
+    </Message>
+  )}
+
+  {/* Post Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+    {posts.map(post => (
+      <PostCard key={post.id} post={post} currentUser={user} />
+    ))}
+  </div>
+</div>
+
   );
 };
 
