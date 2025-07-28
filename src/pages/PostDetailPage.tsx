@@ -54,27 +54,72 @@ const PostDetailPage: React.FC = () => {
   const creatorImageUrl = "/public/assets/images/default-profile-placeholder.svg";
 
   return (
-    <div className="common-container flex-col items-center justify-start max-w-3xl"> {/* Tailwind classes */}
-      <img src={post.imageUrl} alt={post.caption} className="w-full h-auto rounded-lg mb-4" /> {/* Tailwind classes */}
-      <div className="flex flex-col gap-4 w-full"> {/* Tailwind classes */}
-        <div className="flex items-center gap-4 mb-2"> {/* Tailwind classes */}
-          <img src={creatorImageUrl} alt="Creator Avatar" className="w-12 h-12 rounded-full object-cover border-2 border-primary-500" /> {/* Tailwind classes */}
-          <span className="font-bold text-light-1 text-lg">{post.creatorId}</span> {/* Tailwind classes */}
-          <p className="text-light-3 text-sm">{new Date(post.createdAt).toLocaleDateString()} - {post.location || 'Unknown Location'}</p> {/* Tailwind classes */}
-        </div>
-        <p className="text-lg leading-relaxed text-light-1">{post.caption}</p> {/* Tailwind classes */}
-        <div className="flex flex-wrap gap-2 mt-2"> {/* Tailwind classes */}
-          {post.tags?.map(tag => <span key={tag} className="bg-dark-4 text-light-3 px-2 py-1 rounded-md text-xs">#{tag}</span>)} {/* Tailwind classes */}
-        </div>
-        {user && user.id === post.creatorId && (
-          <div className="flex justify-end gap-4 mt-4 w-full"> {/* Tailwind classes */}
-            <StyledButton onClick={() => navigate(`/posts/${post.id}/edit`)} className="shad-button-primary bg-primary-500">Edit Post</StyledButton> {/* Tailwind classes */}
-            <StyledButton onClick={handleDelete} className="shad-button-primary bg-red-500">Delete Post</StyledButton> {/* Tailwind classes */}
-          </div>
-        )}
+   <div className="common-container flex-col items-center justify-start max-w-3xl mx-auto px-4 sm:px-6">
+  {/* Post Image */}
+  <img 
+    src={post.imageUrl} 
+    alt={post.caption} 
+    className="w-full h-auto rounded-xl shadow-lg mb-6 border border-dark-4" 
+  />
+
+  <div className="flex flex-col gap-4 w-full">
+    
+    {/* User Info */}
+    <div className="flex items-center justify-between flex-wrap gap-4 mb-2">
+      <div className="flex items-center gap-3">
+        <img 
+          src={creatorImageUrl} 
+          alt="Creator Avatar" 
+          className="w-12 h-12 rounded-full object-cover border-2 border-primary-500" 
+        />
+        <span className="font-semibold text-light-1 text-lg break-all">
+          {post.creatorId}
+        </span>
       </div>
+      <p className="text-light-3 text-sm">
+        {new Date(post.createdAt).toLocaleDateString()} • {post.location || 'Unknown Location'}
+      </p>
     </div>
-  );
-};
+
+    {/* Caption */}
+    <p className="text-base sm:text-lg leading-relaxed text-light-1 border-l-4 border-primary-500 pl-4 italic">
+      {post.caption}
+    </p>
+
+    {/* Tags */}
+    {post.tags?.length > 0 && (
+      <div className="flex flex-wrap gap-2 mt-2">
+        {post.tags.map(tag => (
+          <span 
+            key={tag} 
+            className="bg-dark-4 text-light-2 px-3 py-1 rounded-full text-xs tracking-wide hover:bg-dark-3 transition"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    {/* Post Controls */}
+    {user && user.id === post.creatorId && (
+      <div className="flex justify-end gap-3 mt-6">
+        <StyledButton 
+          onClick={() => navigate(`/posts/${post.id}/edit`)} 
+          className="shad-button-primary bg-primary-500 hover:bg-primary-600 transition-all"
+        >
+          Edit Post
+        </StyledButton>
+        <StyledButton 
+          onClick={handleDelete} 
+          className="shad-button-primary bg-red-500 hover:bg-red-600 transition-all"
+        >
+          Delete Post
+        </StyledButton>
+      </div>
+    )}
+  </div>
+</div>
+
+)};
 
 export default PostDetailPage;

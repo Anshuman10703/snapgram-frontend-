@@ -85,51 +85,76 @@ const CreatePostPage: React.FC = () => {
   };
 
   return (
-    <div className="common-container flex-col items-center justify-start max-w-2xl"> {/* Tailwind classes */}
-      <h2 className="h2-bold text-center mb-6">Create New Post</h2> {/* Tailwind classes */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full"> {/* Tailwind classes */}
-        <textarea
-          placeholder="Caption..."
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-          required
-          className="shad-textarea" // Tailwind class
-        ></textarea>
-        <div className="file-input-container flex-col flex-center p-8 rounded-xl cursor-pointer bg-dark-3 text-purple-300 relative overflow-hidden"> {/* Tailwind classes */}
-          {filePreview ? (
-            <div className="file-preview flex flex-col items-center"> {/* Tailwind classes */}
-              <img src={filePreview} alt="File Preview" className="max-w-full max-h-40 rounded-md mt-2" /> {/* Tailwind classes */}
-              <p className="text-light-4 text-sm-regular mt-2">Click to change image</p> {/* Tailwind classes */}
-            </div>
-          ) : (
-            <p className="text-light-4 text-sm-regular">Drag & drop an image here, or click to select</p> 
-          )}
-          <input type="file" accept="image/*" onChange={handleFileChange} className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" /> {/* Tailwind classes */}
+   <div className="bg-dark-2 shadow-xl rounded-3xl p-10 w-full max-w-2xl mx-auto flex flex-col items-center animate-fade-in">
+  <h2 className="text-3xl font-bold text-center mb-8 text-white">Create New Post</h2>
+
+  <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
+    
+    {/* Caption */}
+    <textarea
+      placeholder="What's on your mind?"
+      value={caption}
+      onChange={(e) => setCaption(e.target.value)}
+      required
+      className="bg-dark-4 border border-dark-3 text-white rounded-xl p-4 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+    />
+
+    {/* Image Upload */}
+    <div className="flex flex-col items-center justify-center bg-dark-3 border-2 border-dashed border-purple-500 p-6 rounded-xl cursor-pointer hover:bg-dark-4 transition relative overflow-hidden">
+      {filePreview ? (
+        <div className="flex flex-col items-center animate-scale-in">
+          <img src={filePreview} alt="Preview" className="max-w-full max-h-48 rounded-lg shadow-md" />
+          <p className="text-sm text-purple-300 mt-2">Click to change image</p>
         </div>
-        <input
-          type="text"
-          placeholder="Location (e.g., City, Country)"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="shad-input" // Tailwind class
-        />
-        <input
-          type="text"
-          placeholder="Tags (comma-separated, e.g., #nature, #travel)"
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
-          className="shad-input" // Tailwind class
-        />
-        <div className="flex justify-end gap-4 mt-4"> {/* Tailwind classes */}
-          <StyledButton type="button" onClick={() => navigate('/')} className="shad-button-dark4">
-            Cancel
-          </StyledButton>
-          <StyledButton type="submit" disabled={loading} className="shad-button-primary">
-            {loading ? 'Creating...' : 'Create Post'}
-          </StyledButton>
-        </div>
-      </form>
+      ) : (
+        <p className="text-sm text-purple-200">Drag & drop an image here, or click to select</p>
+      )}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+      />
     </div>
+
+    {/* Location */}
+    <input
+      type="text"
+      placeholder="Location (e.g., City, Country)"
+      value={location}
+      onChange={(e) => setLocation(e.target.value)}
+      className="bg-dark-4 border border-dark-3 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+    />
+
+    {/* Tags */}
+    <input
+      type="text"
+      placeholder="Tags (comma-separated, e.g., #nature, #travel)"
+      value={tags}
+      onChange={(e) => setTags(e.target.value)}
+      className="bg-dark-4 border border-dark-3 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+    />
+
+    {/* Buttons */}
+    <div className="flex justify-end gap-4 mt-4">
+      <StyledButton
+        type="button"
+        onClick={() => navigate('/')}
+        className="bg-dark-4 text-white px-6 py-3 rounded-xl hover:bg-dark-5 transition"
+      >
+        Cancel
+      </StyledButton>
+      <StyledButton
+        type="submit"
+        disabled={loading}
+        className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl transition disabled:opacity-50"
+      >
+        {loading ? 'Creating...' : 'Create Post'}
+      </StyledButton>
+    </div>
+  </form>
+</div>
+
   );
 };
 
