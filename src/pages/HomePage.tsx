@@ -63,10 +63,11 @@ const HomePage: React.FC = () => {
   {/* Welcome Message */}
   {user && (
     <div className="text-center mb-6">
-      <p className="text-green-400 text-base sm:text-lg">
-        Welcome, {user?.name || 'User'} ({user?.username || 'anon'})
-      </p>
-    </div>
+  <p className="text-sky-400 text-base sm:text-lg font-medium">
+    Welcome, {user?.name || 'User'} <span className="text-gray-400">(@{user?.username || 'anon'})</span>
+  </p>
+</div>
+
   )}
 
   {/* Status Messages */}

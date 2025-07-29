@@ -14,25 +14,50 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser }) => {
   const navigate = useNavigate();
 
   // Placeholder for creator's actual image URL (if you store it in DynamoDB user table)
-  const creatorImageUrl = "/public/assets/images/default-profile-placeholder.svg"; // Changed to local path for development
+  const creatorImageUrl = "/assets/images/default-profile-placeholder.svg"; // Changed to local path for development
 
   return (
-    <div className="post-card bg-dark-2 rounded-lg shadow-lg overflow-hidden flex flex-col cursor-pointer transform transition-transform duration-200 hover:scale-105" onClick={() => navigate(`/posts/${post.id}`)}> {/* Tailwind classes */}
-      <Link to={`/posts/${post.id}`}>
-        <img src={post.imageUrl} alt={post.caption} className="w-full h-52 object-cover rounded-t-lg" /> {/* Tailwind classes */}
-      </Link>
-      <div className="p-4 flex flex-col gap-2"> {/* Tailwind classes */}
-        <div className="flex items-center gap-2"> {/* Tailwind classes */}
-          <img src={creatorImageUrl} alt="Creator Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-primary-500" /> {/* Tailwind classes */}
-          <span className="font-bold text-light-1 text-lg">{post.creatorId}</span> {/* Tailwind classes */}
-        </div>
-        <h3 className="text-xl font-semibold text-light-1">{post.caption}</h3> {/* Tailwind classes */}
-        <p className="text-light-3 text-sm">{post.creatorId}</p> {/* Tailwind classes */}
-        <div className="flex flex-wrap gap-1 mt-2"> {/* Tailwind classes */}
-          {post.tags?.map(tag => <span key={tag} className="bg-dark-4 text-light-3 px-2 py-1 rounded-md text-xs">#{tag}</span>)} {/* Tailwind classes */}
-        </div>
+  <div
+  className="post-card bg-[#111827] rounded-xl shadow-md overflow-hidden flex flex-col cursor-pointer transform transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+  onClick={() => navigate(`/posts/${post.id}`)}
+>
+  <Link to={`/posts/${post.id}`}>
+    <img
+      src={post.imageUrl}
+      alt={post.caption}
+      className="w-full h-52 object-cover"
+    />
+  </Link>
+
+  <div className="p-4 flex flex-col gap-2">
+    <div className="flex items-center gap-3">
+      <img
+        src={creatorImageUrl}
+        alt="Creator Avatar"
+        className="w-10 h-10 rounded-full object-cover border-2 border-purple-500"
+      />
+      <div className="flex flex-col">
+        <span className="font-semibold text-sky-300 text-sm">Snapgram User</span>
+        {/* Optional user handle subtitle */}
+        {/* <span className="text-xs text-gray-500">Creator</span> */}
       </div>
     </div>
+
+    <h3 className="text-lg font-medium text-gray-200">{post.caption}</h3>
+
+    <div className="flex flex-wrap gap-2 mt-2">
+      {post.tags?.map(tag => (
+        <span
+          key={tag}
+          className="bg-gray-800 text-gray-300 px-2 py-1 rounded-full text-xs font-medium"
+        >
+          #{tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
+
   );
 };
 
