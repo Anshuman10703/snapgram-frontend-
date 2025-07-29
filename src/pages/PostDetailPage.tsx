@@ -51,7 +51,7 @@ const PostDetailPage: React.FC = () => {
   if (error) return <Message className="text-red">Error: {error}</Message>;
   if (!post) return <Message>Post not found.</Message>;
 
-  const creatorImageUrl = "/public/assets/images/default-profile-placeholder.svg";
+  const creatorImageUrl = "/assets/images/boy.png";
 
   return (
    <div className="common-container flex-col items-center justify-start max-w-3xl mx-auto px-4 sm:px-6">
