@@ -14,7 +14,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, currentUser }) => {
   const navigate = useNavigate();
 
   // Placeholder for creator's actual image URL (if you store it in DynamoDB user table)
-  const creatorImageUrl = "/assets/images/default-profile-placeholder.svg"; // Changed to local path for development
+  const creatorImageUrl = "/assets/images/boy.png"; // Changed to local path for development
 
   return (
   <div
