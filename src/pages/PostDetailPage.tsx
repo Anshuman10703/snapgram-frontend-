@@ -72,9 +72,10 @@ const PostDetailPage: React.FC = () => {
           alt="Creator Avatar" 
           className="w-12 h-12 rounded-full object-cover border-2 border-primary-500" 
         />
-        <span className="font-semibold text-light-1 text-lg break-all">
-          {post.creatorId}
-        </span>
+       <span className="font-semibold text-light-1 text-lg break-all">
+             Anonymous
+      </span>
+
       </div>
       <p className="text-light-3 text-sm">
         {new Date(post.createdAt).toLocaleDateString()} • {post.location || 'Unknown Location'}

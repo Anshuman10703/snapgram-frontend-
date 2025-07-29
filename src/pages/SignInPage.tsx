@@ -19,43 +19,55 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center bg-dark-1"> {/* Tailwind classes */}
-      {/* Left side for form */}
-      <div className="common-container flex-col items-center justify-center p-8 max-w-md bg-dark-3 rounded-xl shadow-lg flex-shrink-0"> {/* Tailwind classes */}
-        <h2 className="h2-bold text-center mb-6 text-light-1">Sign In</h2> {/* Tailwind classes */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full"> {/* Tailwind classes */}
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="shad-input" // Tailwind class
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="shad-input" // Tailwind class
-          />
-          <StyledButton type="submit" disabled={isLoading} className="shad-button-primary w-full"> {/* Tailwind classes */}
-            {isLoading ? 'Signing In...' : 'Sign In'}
-          </StyledButton>
-        </form>
-        <p className="text-sm text-light-3 text-center mt-4"> {/* Tailwind classes */}
-          Don't have an account? <Link to="/sign-up" className="text-primary-500 font-semibold">Sign Up</Link> {/* Tailwind classes */}
-        </p>
-      </div>
+   <div className="flex w-screen h-screen justify-center items-center bg-dark-1">
+  {/* Left: Form Container */}
+  <div
+    className="common-container flex-col items-center justify-center p-8 max-w-md bg-dark-3 rounded-xl shadow-lg flex-shrink-0 transition-transform duration-300 ease-in-out hover:scale-[1.01]"
+  >
+    <h2 className="h2-bold text-center mb-6 text-light-1 animate-fade-in">Sign In</h2>
 
-      {/* Right side for side image (hidden on small screens) */}
-      <img
-        src="/public/assets/images/side-img.svg" // Path to your side image
-        alt="Side Image"
-        className="auth-side-image" // CSS class for responsiveness
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full animate-fade-in">
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        className="shad-input focus:ring-2 focus:ring-primary-500 focus:outline-none transition duration-200"
       />
-    </div>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        className="shad-input focus:ring-2 focus:ring-primary-500 focus:outline-none transition duration-200"
+      />
+      <StyledButton
+        type="submit"
+        disabled={isLoading}
+        className="shad-button-primary w-full hover:brightness-110 transition-all duration-200"
+      >
+        {isLoading ? 'Signing In...' : 'Sign In'}
+      </StyledButton>
+    </form>
+
+    <p className="text-sm text-light-3 text-center mt-4">
+      Don't have an account?
+      <Link to="/sign-up" className="text-primary-500 font-semibold ml-1 underline hover:text-primary-300 transition-colors duration-200">
+        Sign Up
+      </Link>
+    </p>
+  </div>
+
+  {/* Right: Image (hidden on small screens) */}
+  <img
+    src="/assets/images/side-img.svg"
+    alt="Welcome Illustration"
+    className="auth-side-image hidden md:block animate-slide-in-left"
+  />
+</div>
+
   );
 };
 
