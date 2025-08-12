@@ -1,6 +1,6 @@
 # 📸 Snapgram – A Serverless Social Media Application
 
-![Snapgram Screenshot](./screenshot.png)  
+
 *A modern, scalable, and cost-efficient social media platform built entirely with AWS serverless services.*
 
 ---
@@ -45,8 +45,6 @@ Snapgram is fully serverless – leveraging **AWS managed services** for high sc
 
 ---
 
-### 📌 High-Level Architecture Diagram
-![Architecture Diagram](./architecture-diagram.png)
 
 ---
 
