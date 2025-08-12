@@ -1,116 +1,81 @@
-# Snapgram: A Serverless Social Media Application
+# 📸 Snapgram – A Serverless Social Media Application
+
+![Snapgram Screenshot](./screenshot.png)  
+*A modern, scalable, and cost-efficient social media platform built entirely with AWS serverless services.*
+
+---
 
 ## 🌟 Overview
 
-Snapgram is a modern, full-stack social media application built on a serverless architecture using Amazon Web Services (AWS). It's a proof-of-concept project designed to demonstrate the power, scalability, and cost-efficiency of building a dynamic web application entirely within the **AWS Free Tier**.
+Snapgram is a full-stack, serverless social media application where users can **register, log in, share photo-based posts, and manage their content**.  
+It demonstrates how to build a **dynamic, cloud-native web app** using only **AWS Free Tier** services – delivering high scalability with minimal operational overhead.
 
-This application allows users to register, log in, create and share photo-based posts, and manage their content. The project served as an invaluable learning experience in building robust, cloud-native applications from the ground up.
+---
 
 ## ✨ Features
 
--   **User Authentication**: Secure user registration and login powered by **Amazon Cognito**.
--   **Post Management**: Full CRUD (Create, Read, Update, Delete) operations for posts, with data stored in **Amazon DynamoDB**.
--   **Image Uploads**: Efficient and secure image uploads directly to **Amazon S3** using a pre-signed URL methodology.
--   **Dynamic Feed**: A responsive home page displaying a feed of all posts.
--   **Post Details**: A dedicated page for viewing detailed information about a single post.
--   **Responsive UI**: A clean and modern user interface built with **React**, **Tailwind CSS**, and **Shadcn UI**.
+- **🔐 Secure Authentication** – User registration and login with **Amazon Cognito**.
+- **📝 Post Management** – Create, read, update, and delete posts stored in **Amazon DynamoDB**.
+- **📤 Image Uploads** – Direct, secure uploads to **Amazon S3** using pre-signed URLs.
+- **📰 Dynamic Feed** – Responsive feed displaying all user posts in real time.
+- **🔍 Post Details Page** – View full post details and metadata.
+- **📱 Responsive UI** – Built with **React**, **Tailwind CSS**, and **Shadcn UI** for a clean, modern look.
+
+---
 
 ## 🚀 Live Demo
 
-Experience the application for yourself:
+**Hosted on AWS Amplify**  
+🔗 **URL:** [Your Amplify Hosting Link]  
+Example: `https://main.d3tvalg0vekvct.amplifyapp.com`
 
-**Deployed URL:** [Your AWS Amplify Hosting URL]
-> *Example: `https://main.d3tvalg0vekvct.amplifyapp.com`*
+---
 
-## 🏛️ Architecture
+## 🏛 Architecture
 
-Snapgram is a serverless masterpiece, where every component is a managed AWS service.
+Snapgram is fully serverless – leveraging **AWS managed services** for high scalability, reliability, and low maintenance.
 
-**High-Level Diagram**
-```mermaid
-graph TD
-    subgraph Frontend
-        A[User Browser / React App]
-    end
+**High-Level Flow:**
+1. **Frontend:** React + Tailwind CSS + Shadcn UI, deployed on **AWS Amplify Hosting**.
+2. **Authentication:** Amazon Cognito for user sign-up/sign-in and session management.
+3. **Database:** Amazon DynamoDB for storing post metadata.
+4. **Storage:** Amazon S3 for image hosting with pre-signed URL uploads.
+5. **API Layer:** Amazon API Gateway + AWS Lambda for business logic.
+6. **Hosting & CI/CD:** AWS Amplify for automated builds and deployments.
 
-    subgraph API Layer
-        B(Amazon API Gateway)
-    end
+---
 
-    subgraph Compute
-        C(AWS Lambda Functions)
-    end
+### 📌 High-Level Architecture Diagram
+![Architecture Diagram](./architecture-diagram.png)
 
-    subgraph Data
-        D[Amazon DynamoDB]
-        E[Amazon S3]
-    end
+---
 
-    subgraph Auth
-        F(Amazon Cognito)
-    end
+## 🛠 Tech Stack
 
-    A -- HTTP Requests --> B
-    B -- Invokes --> C
-    C -- Reads/Writes --> D
-    C -- S3 PUT URL --> E
-    A -- Authenticates --> F
-    A -- Direct Image Upload --> E
-    C -- Gets File --> E
-Key Architectural Decisions:
+| Layer            | Technology |
+|------------------|------------|
+| Frontend         | React, Tailwind CSS, Shadcn UI |
+| Backend/API      | AWS Lambda (Node.js) |
+| Authentication   | Amazon Cognito |
+| Database         | Amazon DynamoDB |
+| Storage          | Amazon S3 |
+| API Gateway      | Amazon API Gateway |
+| Hosting          | AWS Amplify |
 
-Serverless First: All backend logic runs on AWS Lambda, eliminating server management and reducing costs.
+---
 
-Decoupled Services: The application is a collection of independent services (Lambda, API Gateway, DynamoDB) communicating via a well-defined API.
+## 📂 Project Setup
 
-Free Tier Adherence: The architecture was intentionally designed to stay within the AWS Free Tier, demonstrating a pay-per-use model's efficiency.
+### Prerequisites
+- Node.js v18+
+- AWS Account with Free Tier enabled
+- AWS CLI configured locally
 
-Pre-signed URLs: Image uploads are handled by generating a pre-signed S3 URL from a Lambda, allowing the frontend to upload files directly to S3. This is a crucial optimization for performance and cost.
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/snapgram.git
+cd snapgram
 
-🛠️ Technology Stack
-Frontend
-Framework: React.js
-
-Build Tool: Vite
-
-Language: TypeScript
-
-Styling: Tailwind CSS & Shadcn UI
-
-State Management: React Context API
-
-Routing: React Router DOM
-
-HTTP Client: Axios
-
-Backend
-Compute: AWS Lambda (Node.js)
-
-API Gateway: Amazon API Gateway (REST API)
-
-Database: Amazon DynamoDB (NoSQL)
-
-Storage: Amazon S3 (Object Storage)
-
-Authentication: Amazon Cognito (User Pools, Identity Pools)
-
-Access Control: AWS IAM
-
-🚀 Deployment
-The entire application is deployed on AWS.
-
-Frontend: Hosted on AWS Amplify Hosting, with continuous deployment from a GitHub repository.
-
-Backend: A collection of AWS Lambda functions exposed via Amazon API Gateway.
-
-📖 Lessons Learned
-Cloud-Native Debugging: Serverless debugging requires a deep understanding of service integration and logging (CloudWatch is key!).
-
-CORS Configuration: Meticulous attention to detail is required for CORS policies in both API Gateway and Lambda functions to ensure seamless cross-origin communication.
-
-Local vs. Cloud Environments: Discovered the significant benefits of a cloud-based build process (like Amplify's) for overcoming complex local development environment issues.
-
-Free Tier Design: Proactively designing the architecture to fit within Free Tier limits from the start is a rewarding and cost-effective practice.
-
-📜 License
-This project is open source and available under the MIT License.
+# Install dependencies
+npm install
